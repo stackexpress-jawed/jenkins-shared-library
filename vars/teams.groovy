@@ -21,7 +21,7 @@ def send(URL_WEBHOOK) {
                         },
                         {
                             "name": "Git Branch",
-                            "value": "`${GIT_BRANCH}`"
+                            "value": "`${env.getOrDefault(GIT_BRANCH, 'Not defined')}`"
                         },
                         {
                             "name": "Build Number",

@@ -12,7 +12,7 @@ def send(URL_WEBHOOK, COLOR) {
                    "summary": "Notification from ${env.JOB_NAME}",
                    "sections": [{
                        "activityTitle": "Notification from ${env.JOB_NAME}",
-                       "activitySubtitle": "<span style=\'\\\'\'color: #bd8feb;\'\\\'\'>Latest status of build #${env.BUILD_NUMBER}</span>",
+                       "activitySubtitle": "<span style=\'color: #bd8feb;\'>Latest status of build #${env.BUILD_NUMBER}</span>",
                        "activityImage": "https://www.jenkins.io/images/logos/jenkins/jenkins.png",
                        "facts": [
                            {

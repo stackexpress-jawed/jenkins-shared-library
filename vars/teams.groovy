@@ -21,7 +21,7 @@ def send(URL_WEBHOOK, COLOR) {
                            },
                            {
                                "name": "Git Branch",
-                               "value": "`${GIT_BRANCH}`"
+                               "value": "`${env.GIT_BRANCH}`"
                            },
                            {
                                "name": "Build Number",

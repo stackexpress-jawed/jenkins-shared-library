@@ -1,6 +1,6 @@
 def send(URL_WEBHOOK, COLOR) {
    
-   echo "${URL_WEBHOOK}"
+   echo "${currentBuild.result}"
    
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'

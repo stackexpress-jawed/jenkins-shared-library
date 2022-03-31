@@ -11,8 +11,11 @@ def send(URL_WEBHOOK) {
       COLOR_CODE = "0db838"
    } else if (STATUS == 'FAILURE') {
       COLOR_CODE = "d92525"
-   } else {
+   } else if (STATUS == null ){
+      STATUS = "STARTED"
       COLOR_CODE = "ebb734"
+   } else {
+      COLOR_CODE = "2e0411"
    }
   
    def msg = """{

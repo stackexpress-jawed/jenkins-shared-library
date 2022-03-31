@@ -5,7 +5,7 @@ def send(URL_WEBHOOK, COLOR) {
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'
   
-   def msg = """'{
+   def msg = """{
                    "@type": "MessageCard",
                    "@context": "http://schema.org/extensions",
                    "themeColor": "bd8feb",
@@ -41,7 +41,7 @@ def send(URL_WEBHOOK, COLOR) {
                            "uri": "${env.BUILD_URL}"
                        }]
                    }]
-               }'""".stripMargin().stripIndent()
+               }""".stripMargin().stripIndent()
    
    conn.setDoOutput(true)
    conn.setRequestProperty("Content-Type", "application/json")

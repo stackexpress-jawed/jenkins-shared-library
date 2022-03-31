@@ -5,14 +5,17 @@ def send(URL_WEBHOOK) {
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'
    
+   def color = 'bd8feb'
+   def status = 'STARTED'
+   
    def msg = """{
                 "@type": "MessageCard",
                 "@context": "http://schema.org/extensions",
-                "themeColor": "bd8feb",
-                "summary": "Notification from ${env.JOB_NAME}",
+                "themeColor": "$color",
+                "summary": "Notification from `${env.JOB_NAME}`",
                 "sections": [{
                     "activityTitle": "Notification from ${env.JOB_NAME}",
-                    "activitySubtitle": "<span style=\'\\\'\'color: #bd8feb;\'\\\'\'>Latest status of build #${env.BUILD_NUMBER}</span>",
+                    "activitySubtitle": "<span style=\'\\\'\'color: #$color;\'\\\'\'>Latest status of build #${env.BUILD_NUMBER}</span>",
                     "activityImage": "https://www.jenkins.io/images/logos/jenkins/jenkins.png",
                     "facts": [
                         {
@@ -29,7 +32,7 @@ def send(URL_WEBHOOK) {
                         },
                         {
                             "name": "Build Status",
-                            "value": "STARTED"
+                            "value": "$status"
                         }],
                     "markdown": true
                     }],

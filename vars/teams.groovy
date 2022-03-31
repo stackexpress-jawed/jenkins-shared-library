@@ -1,18 +1,28 @@
-def send(URL_WEBHOOK, COLOR) {
+def send(URL_WEBHOOK) {
    
-   echo "${currentBuild.result}"
+   def STATUS = "${currentBuild.result}"
    
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'
+   
+   def COLOR_CODE = "ebb734"
+   
+   if (STATUS == 'SUCCESS') {
+      COLOR_CODE = "0db838"
+   } else if (STATUS == 'FAILURE') {
+      COLOR_CODE = "d92525"
+   } else {
+      COLOR_CODE = "ebb734"
+   }
   
    def msg = """{
                    "@type": "MessageCard",
                    "@context": "http://schema.org/extensions",
-                   "themeColor": "bd8feb",
+                   "themeColor": "$COLOR_CODE",
                    "summary": "Notification from ${env.JOB_NAME}",
                    "sections": [{
                        "activityTitle": "Notification from ${env.JOB_NAME}",
-                       "activitySubtitle": "<span style=\'color: #bd8feb;\'>Latest status of build #${env.BUILD_NUMBER}</span>",
+                       "activitySubtitle": "<span style=\'color: #$COLOR_CODE;\'>Latest status of build #${env.BUILD_NUMBER}</span>",
                        "activityImage": "https://www.jenkins.io/images/logos/jenkins/jenkins.png",
                        "facts": [
                            {

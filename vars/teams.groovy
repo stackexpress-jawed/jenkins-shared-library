@@ -1,6 +1,6 @@
 def send(URL_WEBHOOK) {
    
-   def STATUS = "${currentBuild.result}"
+   def STATUS = currentBuild.result
    
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'
@@ -42,7 +42,7 @@ def send(URL_WEBHOOK) {
                            },
                            {
                                "name": "Build Status",
-                               "value": "STARTED"
+                               "value": "${STATUS}"
                            }],
                        "markdown": true
                        }],

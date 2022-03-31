@@ -5,43 +5,43 @@ def send(URL_WEBHOOK, COLOR) {
    def conn = new URL("${URL_WEBHOOK}").openConnection()
    conn.requestMethod = 'POST'
   
-   def msg = """{
-                "@type": "MessageCard",
-                "@context": "http://schema.org/extensions",
-                "themeColor": "$COLOR",
-                "summary": "Notification from `${env.JOB_NAME}`",
-                "sections": [{
-                    "activityTitle": "Notification from ${env.JOB_NAME}",
-                    "activitySubtitle": "<span style='color: $COLOR;'>Latest status of build #${env.BUILD_NUMBER}</span>",
-                    "activityImage": "https://www.jenkins.io/images/logos/jenkins/jenkins.png",
-                    "facts": [
-                        {
-                            "name": "Pipeline",
-                            "value": "[${env.JOB_NAME}](${env.BUILD_URL}/console)"
-                        },
-                        {
-                            "name": "Git Branch",
-                            "value": "`${env.GIT_BRANCH}`"
-                        },
-                        {
-                            "name": "Build Number",
-                            "value": "${env.BUILD_DISPLAY_NAME}"
-                        },
-                        {
-                            "name": "Build Status",
-                            "value": "$status"
-                        }],
-                    "markdown": true
-                    }],
-                    "potentialAction": [{
-                        "@type": "OpenUri",
-                        "name": "View Build",
-                        "targets": [{
-                        "os": "default",
-                        "uri": "${env.BUILD_URL}"
-                    }]
-                }]
-            }""".stripMargin().stripIndent()
+   def msg = """'{
+                   "@type": "MessageCard",
+                   "@context": "http://schema.org/extensions",
+                   "themeColor": "bd8feb",
+                   "summary": "Notification from ${env.JOB_NAME}",
+                   "sections": [{
+                       "activityTitle": "Notification from ${env.JOB_NAME}",
+                       "activitySubtitle": "<span style=\'\\\'\'color: #bd8feb;\'\\\'\'>Latest status of build #${env.BUILD_NUMBER}</span>",
+                       "activityImage": "https://www.jenkins.io/images/logos/jenkins/jenkins.png",
+                       "facts": [
+                           {
+                               "name": "Pipeline",
+                               "value": "[${env.JOB_NAME}](${env.BUILD_URL}/console)"
+                           },
+                           {
+                               "name": "Git Branch",
+                               "value": "`${GIT_BRANCH}`"
+                           },
+                           {
+                               "name": "Build Number",
+                               "value": "${env.BUILD_DISPLAY_NAME}"
+                           },
+                           {
+                               "name": "Build Status",
+                               "value": "STARTED"
+                           }],
+                       "markdown": true
+                       }],
+                       "potentialAction": [{
+                           "@type": "OpenUri",
+                           "name": "View Build",
+                           "targets": [{
+                           "os": "default",
+                           "uri": "${env.BUILD_URL}"
+                       }]
+                   }]
+               }'""".stripMargin().stripIndent()
    
    conn.setDoOutput(true)
    conn.setRequestProperty("Content-Type", "application/json")
